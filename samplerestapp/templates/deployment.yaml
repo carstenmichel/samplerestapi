@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-samplerestapi
+  labels:
+    app: {{ .Release.Name }}-samplerestapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-samplerestapi
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-samplerestapi
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-samplerestapi
+         # image: bitnami/openldap:2
+          image: image-registry.openshift-image-registry.svc:5000/{{.Release.Namespace}}/samplerestapi:latest
+          ports:
+            - containerPort: 4000
+            

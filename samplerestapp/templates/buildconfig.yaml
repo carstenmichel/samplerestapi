@@ -1,0 +1,17 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: samplerestapiconfig
+spec:
+  triggers:
+    - type: "ConfigChange"
+  source:
+    git: 
+      uri: https://github.com/carstenmichel/samplerestapi.git
+      ref: main
+  strategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'samplerestapi:latest'
